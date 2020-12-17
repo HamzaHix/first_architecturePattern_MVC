@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tv_data ;
     Button btn_getData;
-    Button btn_goToMvp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         // here we find and define our views
         tv_data= findViewById(R.id.tv_data);
         btn_getData= findViewById(R.id.btn_getdata);
-        btn_goToMvp = findViewById(R.id.btn_gotomvp);
 
     }
     public MVC_model getDataFromDataBase(){
@@ -42,10 +40,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Buttons_mainActivity(View view) {
-        if (btn_getData.equals(view)) {
+        if (btn_getData.equals(view))
             tv_data.setText(getDataFromDataBase().getName());
-        } else if (btn_goToMvp.equals(view)) {
-            Toast.makeText(getApplicationContext(), "we dont have this feature yet", Toast.LENGTH_LONG).show();
-        }
+
     }
 }
