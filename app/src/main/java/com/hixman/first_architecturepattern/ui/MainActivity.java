@@ -1,47 +1,58 @@
 package com.hixman.first_architecturepattern.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.hixman.first_architecturepattern.model.MVC_model;
 import com.hixman.first_architecturepattern.R;
 
-// this is how MVC works in a simple way,
-// it's main that the MainActivity is the controller and you have to do everything yourself
+// this is how MVP works in a simple way,
+// here the MainActivity is responsible about handling the UI; it have no relation with the model
 /**
- * MVC:
- * M:model      ==> MVC_model
+ * MVVM:
+ * M:model      ==> MovieModel
  * V:view       ==> tv_data
- * C:controller ==> MainActivity
  * */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     TextView tv_data ;
     Button btn_getData;
+    MovieViewModel movie_viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // here we find and define our views
-        tv_data= findViewById(R.id.tv_data);
+        tv_data    = findViewById(R.id.tv_data);
         btn_getData= findViewById(R.id.btn_getdata);
 
+        movie_viewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+        movie_viewModel.movieNameMutableLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                tv_data.setText(s);
+            }
+        });
+
+
     }
-    public MVC_model getDataFromDataBase(){
-        return new MVC_model("hix coder","15/1/2020","hello everyone",1);
-    }
+
 
     public void Buttons_mainActivity(View view) {
         if (btn_getData.equals(view))
-            tv_data.setText(getDataFromDataBase().getName());
+            movie_viewModel.getMovie_name();
 
     }
+
+
+
 }

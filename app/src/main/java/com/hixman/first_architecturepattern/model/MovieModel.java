@@ -1,12 +1,12 @@
 package com.hixman.first_architecturepattern.model;
 
-public class MVC_model {
+public class MovieModel {
     private String name;
     private String date;
     private String description;
     private int id;
 
-    public MVC_model(String name, String date, String description, int id) {
+    public MovieModel(String name, String date, String description, int id) {
         this.name = name;
         this.date = date;
         this.description = description;
